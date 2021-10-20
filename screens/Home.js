@@ -9,7 +9,11 @@ const Home = ({ navigation }) => {
     };
     return (
         <View style={styles.container}>
-            <Text>Home</Text>
+            <Text style={styles.welcomeText}>Bienvenue sur l'application</Text>
+            <View style={styles.separator}></View>
+            <Text style={styles.detailsText}>
+                Pour accéder aux posts veuillez cliquer sur le boutton ci-dessous
+            </Text>
             {/* <Button title="Accéder aux posts" onPress={handlePress} /> */}
             {/* <Pressable
                 style={({ pressed }) => ({
@@ -33,6 +37,7 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingHorizontal: 10,
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: Colors.secondary,
@@ -42,8 +47,28 @@ const styles = StyleSheet.create({
         padding: 9,
         borderRadius: 5,
     },
+    welcomeText: {
+        fontFamily: "InriaSans_700Bold",
+        fontSize: 25,
+        color: Colors.white,
+        padding: 20,
+    },
+    detailsText: {
+        fontSize: 12,
+        color: Colors.white,
+        paddingVertical: 10,
+        fontFamily: "InriaSans_300Light",
+    },
     btnText: {
         color: Colors.white,
+        // fontFamily: "InriaSans_400Regular",
+    },
+    separator: {
+        borderWidth: 1,
+        borderColor: Colors.greyLight,
+        width: "25%",
+        marginTop: 5,
+        marginBottom: 30,
     },
 });
 

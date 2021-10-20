@@ -3,11 +3,9 @@ export default {
     primaryLight: "#fcd8dd",
     secondary: "#64c9c3",
     secondaryLight: "#d1eaed",
+    secondaryMoreLight: "#d1eaed",
     white: "#fff",
-    grey: "#d1eaed",
-    // (background)
-    darkGrey: " #606060",
-    // (text)
-    greyLight: "#a1a1a1",
-    // (text secondary)
+    grey: "#a1a1a1",
+    greyDark: "#606060",
+    greyLight: "#f7f7f7",
 };
