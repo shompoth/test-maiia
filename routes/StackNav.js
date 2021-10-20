@@ -5,12 +5,23 @@ import { createStackNavigator } from "@react-navigation/stack";
 // Screens
 import Home from "../screens/Home";
 import Posts from "../screens/Posts";
+import Colors from "../styles/Colors";
 
 const Stack = createStackNavigator();
 
 const StackNav = () => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: Colors.secondary,
+                },
+                headerTintColor: Colors.white,
+                headerTitleStyle: {
+                    fontWeight: "bold",
+                },
+            }}
+        >
             <Stack.Screen
                 name="Accueil"
                 component={Home}
