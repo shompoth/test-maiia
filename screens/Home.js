@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, Pressable } from "react-native";
 
 const Home = ({ navigation }) => {
     // Fonction
@@ -9,7 +9,15 @@ const Home = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text>Home</Text>
-            <Button title="Accéder aux posts" onPress={handlePress} />
+            {/* <Button title="Accéder aux posts" onPress={handlePress} /> */}
+            <Pressable
+                style={({ pressed }) => ({
+                    backgroundColor: pressed ? "lightseagreen" : "rebeccapurple",
+                })}
+                onPress={handlePress}
+            >
+                <Text style={styles.btn}>Accéder aux Posts</Text>
+            </Pressable>
         </View>
     );
 };
