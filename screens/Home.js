@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         // fontFamily: "InriaSans_400Regular",
     },
     separator: {
-        borderWidth: 1,
+        borderWidth: 1.1,
         borderColor: Colors.greyLight,
         width: "25%",
         marginTop: 5,
