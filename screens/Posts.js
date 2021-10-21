@@ -9,35 +9,59 @@ import Colors from "../styles/Colors";
 
 const Posts = () => {
     // State
-    const [postsArray, setPostsArray] = useState(null);
+    const [postsArray, setPostsArray] = useState([]);
+    const [currentPage, SetCurrentPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
 
     // UseEffect
     useEffect(() => {
-        axios
-            .get(`https://jsonplaceholder.typicode.com/posts`)
-            .then(res => {
-                const arrayFiftyPosts = [];
-                arrayFiftyPosts.push(...res.data.splice(1, 50));
+        getPosts();
+    }, [currentPage]);
 
-                setPostsArray(arrayFiftyPosts);
+    // Fonctions
+    const getPosts = () => {
+        setIsLoading(true);
+        axios
+            .get(`https://jsonplaceholder.typicode.com/posts?_page=${currentPage}`)
+            .then(res => {
+                const array = postsArray.concat([...res.data]);
+                setPostsArray(array);
             })
             .catch(error => {
                 console.log(error);
             });
-    }, []);
+        setIsLoading(false);
+    };
 
-    // Fonction
     const renderCards = ({ item }) => {
         return <PostCard item={item} />;
     };
 
+    const loadMorePosts = () => {
+        if (currentPage === 5) {
+            return null;
+        }
+        SetCurrentPage(prevState => prevState + 1);
+    };
+
+    const renderLoader = () => {
+        return isLoading ? (
+            <View style={styles.loader}>
+                <ActivityIndicator size="large" color={Colors.primary} />
+            </View>
+        ) : null;
+    };
+
     return (
         <View style={styles.container}>
-            {postsArray ? (
+            {postsArray.length ? (
                 <FlatList
                     data={postsArray}
                     keyExtractor={item => item.id.toString()}
                     renderItem={renderCards}
+                    ListFooterComponent={renderLoader}
+                    onEndReached={loadMorePosts}
+                    onEndReachedThreshold={0}
                 />
             ) : (
                 <ActivityIndicator size="large" color={Colors.primary} />
@@ -53,6 +77,11 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 10,
         backgroundColor: Colors.greyLight,
+    },
+    loader: {
+        marginTop: 8,
+        marginBottom: 16,
+        alignItems: "center",
     },
 });
 
