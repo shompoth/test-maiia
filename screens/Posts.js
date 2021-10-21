@@ -67,9 +67,11 @@ const Posts = () => {
             });
             setPostsFilteredArray(newData);
             setSearch(text);
+            console.log(postsMasterArray.length);
         } else {
-            setPostsFilteredArray(postsMasterArray);
+            setPostsFilteredArray([]);
             setSearch(text);
+            SetCurrentPage(1);
         }
     };
 
