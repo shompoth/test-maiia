@@ -6,9 +6,8 @@ import { Ionicons } from "@expo/vector-icons";
 // Composant
 import Colors from "../../styles/Colors";
 
-const SearchBar = () => {
+const SearchBar = ({ searchFilter, search }) => {
     // States
-    const [search, setSearch] = useState("");
     const [placeHolder, setPlaceHolder] = useState("Rechercher");
 
     return (
@@ -23,16 +22,19 @@ const SearchBar = () => {
                 placeholder={placeHolder}
                 placeholderTextColor={Colors.grey}
                 underlineColorAndroid="transparent"
-                onChangeText={text => setSearch(text)}
+                onChangeText={text => searchFilter(text)}
                 autoCorrect={false}
             />
             <View style={styles.closeIconContainer}>
                 {search ? (
-                    <TouchableOpacity onPress={() => setSearch("")} activeOpacity={0.7}>
+                    <TouchableOpacity
+                        onPress={() => searchFilter("")}
+                        activeOpacity={0.7}
+                    >
                         <Ionicons
                             name="md-close-circle-outline"
                             size={20}
-                            color={Colors.grey}
+                            color={Colors.primary}
                         />
                     </TouchableOpacity>
                 ) : null}

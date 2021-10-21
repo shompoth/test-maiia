@@ -7,10 +7,14 @@ import axios from "axios";
 import PostCard from "../components/PostCard/PostCard";
 import Colors from "../styles/Colors";
 import SearchBar from "../components/SearchBar/SearchBar";
+import NoPost from "../components/NoPost/NoPost";
 
 const Posts = () => {
     // State
-    const [postsArray, setPostsArray] = useState([]);
+    const [postsFilteredArray, setPostsFilteredArray] = useState([]);
+    const [postsMasterArray, setPostsMasterArray] = useState([]);
+    const [search, setSearch] = useState("");
+
     const [currentPage, SetCurrentPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -25,8 +29,9 @@ const Posts = () => {
         axios
             .get(`https://jsonplaceholder.typicode.com/posts?_page=${currentPage}`)
             .then(res => {
-                const array = postsArray.concat([...res.data]);
-                setPostsArray(array);
+                const array = postsFilteredArray.concat([...res.data]);
+                setPostsFilteredArray(array);
+                setPostsMasterArray(array);
             })
             .catch(error => {
                 console.log(error);
@@ -35,7 +40,7 @@ const Posts = () => {
     };
 
     const renderCards = ({ item }) => {
-        return <PostCard item={item} />;
+        return <PostCard item={item} search={search} />;
     };
 
     const loadMorePosts = () => {
@@ -53,18 +58,35 @@ const Posts = () => {
         ) : null;
     };
 
+    const searchFilter = text => {
+        if (text) {
+            const newData = postsMasterArray.filter(post => {
+                const postData = post.title ? post.title.toUpperCase() : "".toUpperCase();
+                const textData = text.toUpperCase();
+                return postData.indexOf(textData) > -1;
+            });
+            setPostsFilteredArray(newData);
+            setSearch(text);
+        } else {
+            setPostsFilteredArray(postsMasterArray);
+            setSearch(text);
+        }
+    };
+
     return (
         <View style={styles.container}>
-            <SearchBar />
-            {postsArray.length ? (
+            <SearchBar searchFilter={searchFilter} />
+            {postsFilteredArray.length ? (
                 <FlatList
-                    data={postsArray}
+                    data={postsFilteredArray}
                     keyExtractor={item => item.id.toString()}
                     renderItem={renderCards}
                     ListFooterComponent={renderLoader}
                     onEndReached={loadMorePosts}
                     onEndReachedThreshold={0}
                 />
+            ) : search ? (
+                <NoPost />
             ) : (
                 <ActivityIndicator size="large" color={Colors.primary} />
             )}
@@ -75,8 +97,6 @@ const Posts = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
         padding: 10,
         backgroundColor: Colors.greyLight,
     },
