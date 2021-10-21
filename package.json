@@ -11,6 +11,7 @@
     "@expo-google-fonts/inria-sans": "^0.2.0",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/stack": "^6.0.11",
+    "axios": "^0.23.0",
     "expo": "~42.0.1",
     "expo-app-loading": "1.1.2",
     "expo-font": "~9.2.1",
