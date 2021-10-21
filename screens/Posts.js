@@ -6,6 +6,7 @@ import axios from "axios";
 // Composant
 import PostCard from "../components/PostCard/PostCard";
 import Colors from "../styles/Colors";
+import SearchBar from "../components/SearchBar/SearchBar";
 
 const Posts = () => {
     // State
@@ -54,6 +55,7 @@ const Posts = () => {
 
     return (
         <View style={styles.container}>
+            <SearchBar />
             {postsArray.length ? (
                 <FlatList
                     data={postsArray}
