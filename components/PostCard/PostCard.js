@@ -3,35 +3,34 @@ import { StyleSheet, Text, View, Image } from "react-native";
 
 const PostCard = ({ item }) => {
     // Fonction
-    // const renderProfilPicture = () => {
-    //     switch (item.uderId) {
-    //         case 1:
-    //             return require("../../assets/1");
-    //         case 2:
-    //             return require("../../assets/2");
-    //         case 3:
-    //             return require("../../assets/3");
-    //         case 4:
-    //             return require("../../assets/4");
-    //         case 5:
-    //             return require("../../assets/5");
-    //         case 6:
-    //             return require("../../assets/6");
-    //         case 7:
-    //             return require("../../assets/7");
-    //         case 8:
-    //             return require("../../assets/8");
-    //         default:
-    //             break;
-    //     }
-    // };
+    const renderProfilPicture = id => {
+        switch (id) {
+            case 1:
+                return require("../../assets/1.jpeg");
+            case 2:
+                return require("../../assets/2.jpeg");
+            case 3:
+                return require("../../assets/3.jpeg");
+            case 4:
+                return require("../../assets/4.jpeg");
+            case 5:
+                return require("../../assets/5.jpeg");
+            case 6:
+                return require("../../assets/6.jpeg");
+            case 7:
+                return require("../../assets/7.jpeg");
+            case 8:
+                return require("../../assets/8.jpeg");
+            default:
+                break;
+        }
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.userContainer}>
-                {/* <Image source={renderProfilPicture} /> */}
                 <Text style={styles.titleText}>{item.title}</Text>
-
-                <Image source={require("../../assets/1.jpeg")} style={styles.userPic} />
+                <Image source={renderProfilPicture(item.userId)} style={styles.userPic} />
             </View>
             <View style={styles.bodyTextContainer}>
                 <Text style={styles.bodyText}>{item.body}</Text>
@@ -41,9 +40,15 @@ const PostCard = ({ item }) => {
 };
 
 const styles = StyleSheet.create({
-    container: { width: "100%", borderWidth: 0.5, padding: 10, marginBottom: 20 },
+    container: {
+        width: "100%",
+        borderWidth: 0.5,
+        padding: 10,
+        marginBottom: 20,
+    },
     bodyTextContainer: {
         width: "100%",
+        paddingBottom: 15,
     },
     titleText: {
         fontFamily: "InriaSans_700Bold",
@@ -58,14 +63,13 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         flexWrap: "wrap",
-        marginBottom: 20,
+        marginBottom: 25,
     },
     userPic: {
         width: 60,
         height: 60,
         borderRadius: 60 / 2,
         marginBottom: 10,
-        // alignSelf: "flex-end",
         alignSelf: "flex-start",
     },
 });
