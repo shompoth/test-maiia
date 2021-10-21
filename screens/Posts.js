@@ -1,13 +1,6 @@
 // Librairies
 import React, { useState, useEffect } from "react";
-import {
-    FlatList,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
-    ActivityIndicator,
-} from "react-native";
+import { FlatList, StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import axios from "axios";
 
 // Composant
@@ -23,7 +16,10 @@ const Posts = () => {
         axios
             .get(`https://jsonplaceholder.typicode.com/posts`)
             .then(res => {
-                setPostsArray([...res.data.splice(1, 50)]);
+                const arrayFiftyPosts = [];
+                arrayFiftyPosts.push(...res.data.splice(1, 50));
+
+                setPostsArray(arrayFiftyPosts);
             })
             .catch(error => {
                 console.log(error);
@@ -40,7 +36,7 @@ const Posts = () => {
             {postsArray ? (
                 <FlatList
                     data={postsArray}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item.id.toString()}
                     renderItem={renderCards}
                 />
             ) : (
@@ -51,7 +47,13 @@ const Posts = () => {
 };
 
 const styles = StyleSheet.create({
-    container: { flex: 1, justifyContent: "center", alignItems: "center", padding: 10 },
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 10,
+        backgroundColor: Colors.greyLight,
+    },
 });
 
 export default Posts;
