@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     detailsText: {
         fontSize: 12,
         color: Colors.white,
-        paddingVertical: 10,
+        paddingVertical: 18,
         fontFamily: "InriaSans_300Light",
     },
     separator: {

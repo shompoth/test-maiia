@@ -97,7 +97,7 @@ const Posts = () => {
 
     return (
         <View style={styles.container}>
-            <SearchBar searchFilter={searchFilter} />
+            <SearchBar searchFilter={searchFilter} search={search} />
             {postsFilteredArray.length ? (
                 <FlatList
                     data={postsFilteredArray}

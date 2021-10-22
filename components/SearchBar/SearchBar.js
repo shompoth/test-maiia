@@ -15,7 +15,6 @@ const SearchBar = ({ searchFilter, search }) => {
             <View style={styles.searchIconContainer}>
                 <Ionicons name="search" size={20} color={Colors.grey} />
             </View>
-
             <TextInput
                 style={styles.textInputStyles}
                 value={search}
