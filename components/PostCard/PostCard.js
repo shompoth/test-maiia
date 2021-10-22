@@ -50,21 +50,17 @@ const PostCard = ({ item }) => {
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        // borderWidth: 0.5,
         padding: 10,
         paddingVertical: 20,
         marginBottom: 20,
         backgroundColor: Colors.white,
-
         shadowColor: Colors.primary,
-
         shadowOffset: {
             width: 0,
             height: 2,
         },
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
-
         elevation: 4,
     },
     userContainer: {

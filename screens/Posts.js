@@ -13,15 +13,21 @@ const Posts = () => {
     // State
     const [postsFilteredArray, setPostsFilteredArray] = useState([]);
     const [postsMasterArray, setPostsMasterArray] = useState([]);
+    const [postsConstArray, setPostsConstArray] = useState([]);
     const [search, setSearch] = useState("");
 
     const [currentPage, SetCurrentPage] = useState(1);
+    const [limitNumberPosts, SetLimitNumberPosts] = useState(50);
     const [isLoading, setIsLoading] = useState(false);
 
     // UseEffect
     useEffect(() => {
         getPosts();
     }, [currentPage]);
+
+    useEffect(() => {
+        getAllPosts();
+    }, []);
 
     // Fonctions
     const getPosts = () => {
@@ -39,12 +45,28 @@ const Posts = () => {
         setIsLoading(false);
     };
 
+    const getAllPosts = () => {
+        setIsLoading(true);
+        axios
+            .get(`https://jsonplaceholder.typicode.com/posts?_limit=${limitNumberPosts}`)
+            .then(res => {
+                setPostsConstArray(res.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        setIsLoading(false);
+    };
+
     const renderCards = ({ item }) => {
         return <PostCard item={item} search={search} />;
     };
 
     const loadMorePosts = () => {
         if (currentPage === 5) {
+            return null;
+        }
+        if (search.length) {
             return null;
         }
         SetCurrentPage(prevState => prevState + 1);
@@ -60,18 +82,16 @@ const Posts = () => {
 
     const searchFilter = text => {
         if (text) {
-            const newData = postsMasterArray.filter(post => {
+            const newData = postsConstArray.filter(post => {
                 const postData = post.title ? post.title.toUpperCase() : "".toUpperCase();
                 const textData = text.toUpperCase();
                 return postData.indexOf(textData) > -1;
             });
             setPostsFilteredArray(newData);
             setSearch(text);
-            console.log(postsMasterArray.length);
         } else {
-            setPostsFilteredArray([]);
+            setPostsFilteredArray(postsMasterArray);
             setSearch(text);
-            SetCurrentPage(1);
         }
     };
 
