@@ -108,7 +108,7 @@ const Posts = () => {
                     onEndReachedThreshold={0}
                 />
             ) : search ? (
-                <NoPost />
+                <NoPost>Pas d'article disponible avec le titre recherché</NoPost>
             ) : (
                 <ActivityIndicator size="large" color={Colors.primary} />
             )}

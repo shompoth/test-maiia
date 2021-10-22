@@ -16,7 +16,7 @@ const Home = ({ navigation }) => {
             <Text style={styles.welcomeText}>Bienvenue sur l'application</Text>
             <View style={styles.separator}></View>
             <Text style={styles.detailsText}>
-                Pour accéder aux posts veuillez cliquer sur le boutton ci-dessous
+                Pour accéder aux posts veuillez cliquer sur le bouton ci-dessous
             </Text>
             <Button handlePress={handlePress} />
         </View>
